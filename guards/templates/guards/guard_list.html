@@ -1,0 +1,76 @@
+{% extends 'guards/base.html' %}
+
+{% block content %}
+
+
+        <div class="row">
+                    <div class="col-lg-3">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <span class="label label-success pull-right">{{ mguards.count }}</span>
+                                <h5><i class="fa fa-male"> </i> Male</h5>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <span class="label label-danger pull-right">{{ fguards.count}}</span>
+                                <h5><i class="fa fa-female"> </i> Female</h5>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <span class="label label-warning pull-right">{{ guards.count }}</span>
+                                <h5>Total</h5>
+                            </div>
+
+                        </div>
+                    </div>
+        </div>
+
+
+<div class="ibox-content">
+    <input type="text" class="form-control input-sm m-b-xs" id="filter"
+           placeholder="Search in table">
+
+    <table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Telephone</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for guard in guards %}
+        <tr>
+
+            <td> <a href="{% url 'guard_detail' pk=guard.pk %}">{{ guard.lastname }} {{ guard.name }}</a></td>
+            <td> {{ guard.age }} </td>
+            <td> {{ guard.telephone }} </td>
+            <td><a class="btn btn-default" href="{% url 'guard_edit' pk=guard.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+            </td>
+
+        </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="5">
+                <ul class="pagination pull-right"></ul>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+
+
+{% endblock %}
